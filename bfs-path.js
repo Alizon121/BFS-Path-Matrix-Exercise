@@ -1,15 +1,36 @@
 function findNeighbors(node, matrix) {
-    // Up
 
-    // Down
+   let [row,column] = node
+    let neighbors = []
 
-    // Left
+    let matrixLength = matrix.length
+    let maxtrixColumn = matrix[0].length
+        // Up -> subtract 1 from row
+        let up = [row-1,column]
+        // Down -> add 1 to row
+        let down = [row+1,column]
+        // Left subtract 1 from column
+        let left = [row, column-1]
+        // Right -> add 1 to column
+        let right = [row,column+1]
 
-    // Right
+    if (row-1 >= 0) {
+        neighbors.push(up)
+    }
+    if (row+1 < maxtrixColumn) {
+        neighbors.push(down)
+    }
+    if (column-1 >= 0) {
+        neighbors.push(left)
+    }
+    if (column+1 < matrixLength) {
+        neighbors.push(right)
+    }
 
-    // Your code here 
-    console.log(matrix)
-}
+
+        return neighbors
+        }
+        
 
 
 function bfsPath(matrix, startNode, endValue) {
