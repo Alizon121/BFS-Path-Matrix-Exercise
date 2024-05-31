@@ -26,15 +26,62 @@ function findNeighbors(node, matrix) {
     if (column+1 < matrixLength) {
         neighbors.push(right)
     }
-
-
         return neighbors
         }
         
 
 
+
+
+        // - General Guideline(may need to modify)
+// 1. Create a queue and enqueue the starting node
+// 2. Create a set to store visited nodes
+// 3. While the queue is not empty, repeat steps 4-6
+// 4. Dequeue the first node and check if it's been visited
+// 5. If not, mark it as visited and DO THE THING
+    // - Requires converting the node coordinates array into a string data type
+// 6. Put all its neighbors in the back of the queue
+
+
+
 function bfsPath(matrix, startNode, endValue) {
-    // Your code here 
+// console.log(matrix) // the last element is 16
+// console.log(startNode) // start is [0,0]
+
+let queue = [startNode]
+let visited = new Set()
+visited.add(startNode.join(", "))
+let result = [startNode]
+
+
+let [row1, column1] = startNode
+if (matrix[row1][column1] === endValue) return queue
+
+// May need to add the coordinates to the set -> make into string?
+
+
+
+while (queue.length > 0) {
+    let currentNode = queue.shift() // [0,0]
+    let [row, column] = currentNode
+    let coordinate = matrix[row][column]
+    
+// We need to make sure that the set does not already contain the neighbors at not only the currentNode
+let neighbors = findNeighbors(currentNode, matrix)
+for (let neighbor of neighbors) {
+    if (!visited.has(neighbor.join(", "))) {
+        // if we visited the neighbor, don't add to queue.
+        let string = neighbor.join(", ")
+        visited.add(string)
+        queue.push(neighbor)
+        result.push(neighbor)
+    }
+}
+    if (coordinate === endValue) {
+        return result
+    }
+}
+return false
 }
 
 
